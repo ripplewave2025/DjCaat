@@ -196,9 +196,21 @@ export default function LinksPage() {
         </a>
       </div>
 
-      <div className="text-center">
+      <div className="text-center space-y-1">
         <p className="text-[10px] font-mono text-gray-500">
           Powered by DJ Caat Official Architecture • Darjeeling, India
+        </p>
+        <p className="text-[10px] font-mono text-gray-400">
+          Managed & Engineered by{" "}
+          <a
+            href={ARTIST_INFO.portfolioUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-cyanAccent hover:underline font-bold inline-flex items-center gap-1"
+          >
+            <span>Upesh Bishwakarma</span>
+            <ExternalLink className="w-2.5 h-2.5" />
+          </a>
         </p>
       </div>
     </div>

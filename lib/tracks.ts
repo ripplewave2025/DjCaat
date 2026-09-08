@@ -115,6 +115,8 @@ export const ARTIST_INFO = {
   spotify: "https://open.spotify.com/artist/5gDEc2CoSUgct5C1Q3CHoD",
   youtube: "https://www.youtube.com/@d.g_dj_caat",
   soundcloud: "https://soundcloud.com/dgdjcaat",
-  email: "collab@djcaat.com",
-  mgmtEmail: "management@djcaat.com"
+  email: "ceo@gorkhayai.com",
+  mgmtEmail: "ceo@gorkhayai.com",
+  portfolioUrl: "https://portfolio-next-fawn-five.vercel.app/",
+  managedBy: "Upesh Bishwakarma"
 };

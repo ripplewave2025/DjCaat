@@ -124,14 +124,29 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 font-mono">
-          <p>© {new Date().getFullYear()} DJ CAAT. All rights reserved. Darjeeling, India.</p>
-          <div className="flex items-center space-x-3 mt-3 sm:mt-0">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 font-mono gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+            <p>© {new Date().getFullYear()} DJ CAAT. All rights reserved. Darjeeling, India.</p>
+            <span className="hidden sm:inline text-gray-700">•</span>
+            <p className="text-gray-400">
+              Managed & Engineered by{" "}
+              <a
+                href={ARTIST_INFO.portfolioUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-cyanAccent hover:underline font-bold inline-flex items-center gap-1"
+              >
+                <span>Upesh Bishwakarma</span>
+                <ExternalLink className="w-2.5 h-2.5" />
+              </a>
+            </p>
+          </div>
+          <div className="flex items-center space-x-3">
             <span className="text-cyanAccent">33.3K+ Verified Reach</span>
             <span>•</span>
             <Link
               href="/admin/plan"
-              className="text-gray-600 hover:text-cyanAccent transition-colors flex items-center space-x-1"
+              className="text-gray-500 hover:text-cyanAccent transition-colors flex items-center space-x-1"
               title="Private Management Portal"
             >
               <span>Owner Access</span>

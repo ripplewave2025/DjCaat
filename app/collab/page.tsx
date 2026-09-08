@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Sparkles, UploadCloud, ShieldCheck, CheckCircle2, ArrowRight, Music, AlertCircle, Clock, MapPin } from "lucide-react";
+import { Sparkles, UploadCloud, ShieldCheck, CheckCircle2, ArrowRight, Music, AlertCircle, Clock, MapPin, Mail, ExternalLink } from "lucide-react";
 import { ARTIST_INFO } from "@/lib/tracks";
 
 export default function CollabPage() {
@@ -91,6 +91,34 @@ export default function CollabPage() {
         <p className="text-sm text-gray-400 leading-relaxed max-w-2xl">
           Direct stem intake for vocalists, producers, and labels. Bypass cluttered Instagram DMs and submit your project stems directly to DJ Caat for review.
         </p>
+      </div>
+
+      {/* Direct Email Collab & Management Hub Banner */}
+      <div className="mb-6 p-4 rounded-xl bg-gradient-to-r from-cyanAccent/10 to-purpleAccent/10 border border-cyanAccent/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 backdrop-blur-md shadow-cyan-glow">
+        <div className="space-y-1 text-xs">
+          <span className="font-bold text-white flex items-center gap-1.5">
+            <Mail className="w-4 h-4 text-cyanAccent" />
+            <span>Prefer to Collab via Direct Email?</span>
+          </span>
+          <p className="text-gray-300">
+            Send collaboration requests, stem links, and release proposals directly to{" "}
+            <a href={`mailto:${ARTIST_INFO.email}`} className="text-cyanAccent font-mono font-bold hover:underline">
+              {ARTIST_INFO.email}
+            </a>
+          </p>
+        </div>
+        <div className="text-[11px] font-mono shrink-0 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">
+          <span className="text-gray-400">Everything Managed by: </span>
+          <a
+            href={ARTIST_INFO.portfolioUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-white hover:text-cyanAccent font-bold underline inline-flex items-center gap-1"
+          >
+            <span>Upesh Bishwakarma</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        </div>
       </div>
 
       {/* Notice Banner */}

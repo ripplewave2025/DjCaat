@@ -87,10 +87,17 @@ export default function AdminPlanPage() {
     },
     {
       no: "06",
-      title: "Domain Provisioning, DNS Routing & Security",
-      specs: "Root domain configuration & Cloudflare SSL integration, custom business email routing (e.g. mgmt@djcaat.com), Meta/TikTok tracking pixel integration for IG traffic.",
+      title: "DNS Routing, Cloudflare Business Email & Security",
+      specs: "Root domain configuration & Cloudflare SSL integration, custom business email routing (e.g. mgmt@djcaat.com, collab@djcaat.com), Meta/TikTok tracking pixel integration for IG traffic.",
       hours: 4,
       amountUsd: 100.0,
+    },
+    {
+      no: "07",
+      title: "Domain Name Acquisition & 1-Year Registration",
+      specs: "Direct procurement of official artist domain (djcaat.com / .in) at direct registrar price (₹ 1,081.40), WHOIS privacy protection, and DNS setup.",
+      hours: 1,
+      amountUsd: 1081.40 / 83.4,
     },
   ];
 
@@ -199,6 +206,15 @@ export default function AdminPlanPage() {
               INR (₹)
             </button>
           </div>
+
+          <Link
+            href="/invoice"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cyanAccent text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 shadow-cyan-glow transition-all"
+            title="Open Full Pro-Forma Invoice"
+          >
+            <FileText className="w-4 h-4" />
+            <span>Official Invoice</span>
+          </Link>
 
           <button
             onClick={() => window.print()}
@@ -370,7 +386,7 @@ export default function AdminPlanPage() {
               <div className="p-3 rounded-xl bg-white/5 border border-white/5 space-y-1">
                 <span className="font-bold text-white block font-mono text-xs">Professional Email Routing:</span>
                 <p className="text-gray-400">
-                  Configure <code className="text-cyanAccent font-mono">mgmt@djcaat.com</code> and <code className="text-purpleAccent font-mono">collab@djcaat.com</code> using <strong>Cloudflare Email Routing</strong> (100% free forwarding directly to personal Gmail). Immediate credibility when pitching to labels and international collaborators.
+                  Configure <code className="text-cyanAccent font-mono">mgmt@djcaat.com</code> and <code className="text-purpleAccent font-mono">collab@djcaat.com</code> using <strong>Cloudflare Email Routing</strong> (forwarding directly to management email <code className="text-cyanAccent font-mono">ceo@gorkhayai.com</code>). Immediate credibility when pitching to labels and international collaborators.
                 </p>
               </div>
             </div>
