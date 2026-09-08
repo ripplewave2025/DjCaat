@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, Play, Pause, Download, Check, Sparkles, Shield, Disc, ArrowRight } from "lucide-react";
+import { ShoppingBag, Play, Pause, Download, Check, Sparkles, Shield, Disc, ArrowRight, X, Lock } from "lucide-react";
 
 interface SoundPack {
   id: string;
@@ -62,7 +62,7 @@ const SOUND_PACKS: SoundPack[] = [
     },
     features: [
       "Signature melodies straight from NEPAMORPHOSIS & TIMRO YAAD MA",
-      "Himalayan acoustic folk instruments resampled through vintage Roland SP-404",
+      "Himalayan folk instruments resampled through vintage Roland SP-404",
       "Aggressive drift percussion loops & stutter fills",
       "Pre-cleared 100% royalty-free for commercial release"
     ],
@@ -136,7 +136,7 @@ export default function StorePage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 pb-24 space-y-10 sm:space-y-12">
       {/* Top Banner */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
         <div>
@@ -157,7 +157,7 @@ export default function StorePage() {
           <span className="text-xs font-mono text-gray-400 px-2">Currency:</span>
           <button
             onClick={() => setCurrency("USD")}
-            className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-colors ${
               currency === "USD" ? "bg-cyanAccent text-black shadow-cyan-glow" : "text-gray-400 hover:text-white"
             }`}
           >
@@ -165,7 +165,7 @@ export default function StorePage() {
           </button>
           <button
             onClick={() => setCurrency("INR")}
-            className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-colors ${
               currency === "INR" ? "bg-cyanAccent text-black shadow-cyan-glow" : "text-gray-400 hover:text-white"
             }`}
           >
@@ -175,16 +175,16 @@ export default function StorePage() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {SOUND_PACKS.map((pack) => (
           <div
             key={pack.id}
-            className="glass-panel glass-panel-hover rounded-2xl border border-white/10 p-6 flex flex-col justify-between space-y-6 relative overflow-hidden"
+            className="glass-panel-premium glass-panel-hover rounded-2xl border border-white/10 p-5 sm:p-6 flex flex-col justify-between space-y-6 relative overflow-hidden shadow-xl"
           >
             <div className="space-y-5">
               {/* Product Header & Art */}
               <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <div className="w-full sm:w-36 h-36 rounded-xl relative overflow-hidden shrink-0 border border-white/10 shadow-lg">
+                <div className="w-full sm:w-36 aspect-video sm:aspect-square rounded-xl relative overflow-hidden shrink-0 border border-white/10 shadow-lg">
                   <Image
                     src={pack.coverImage}
                     alt={pack.title}
@@ -195,7 +195,7 @@ export default function StorePage() {
                   {/* Floating Play Preview Button */}
                   <button
                     onClick={() => togglePreview(pack.id)}
-                    className="absolute inset-0 m-auto w-12 h-12 rounded-full bg-cyanAccent text-black flex items-center justify-center shadow-cyan-glow hover:scale-110 transition-transform"
+                    className="absolute inset-0 m-auto w-12 h-12 rounded-full bg-cyanAccent text-black flex items-center justify-center shadow-cyan-glow hover:scale-110 active:scale-95 transition-transform"
                     title="Audio Preview"
                   >
                     {playingPackId === pack.id ? (
@@ -206,7 +206,7 @@ export default function StorePage() {
                   </button>
                 </div>
 
-                <div className="space-y-2 flex-1">
+                <div className="space-y-2 flex-1 min-w-0">
                   <div className="flex flex-wrap gap-1.5">
                     {pack.tags.map((tag) => (
                       <span
@@ -218,12 +218,12 @@ export default function StorePage() {
                     ))}
                   </div>
 
-                  <h3 className="text-xl font-black text-white tracking-wide">{pack.title}</h3>
+                  <h3 className="text-lg sm:text-xl font-black text-white tracking-wide">{pack.title}</h3>
                   <p className="text-xs text-gray-400">{pack.subtitle}</p>
 
                   <div className="text-xl font-mono font-black text-cyanAccent pt-1">
                     {currency === "USD" ? `$${pack.priceUsd}` : `₹${pack.priceInr}`}
-                    <span className="text-[10px] text-gray-400 font-normal ml-2">Instant Digital Download</span>
+                    <span className="text-[10px] text-gray-400 font-normal ml-2">Instant Download</span>
                   </div>
                 </div>
               </div>
@@ -231,19 +231,19 @@ export default function StorePage() {
               {/* Specs Box */}
               <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-void/60 border border-white/5 text-[11px] font-mono">
                 <div>
-                  <span className="text-gray-500 block">FORMAT</span>
+                  <span className="text-gray-500 block text-[10px]">FORMAT</span>
                   <span className="text-gray-200">{pack.specs.format}</span>
                 </div>
                 <div>
-                  <span className="text-gray-500 block">FILE SIZE</span>
+                  <span className="text-gray-500 block text-[10px]">FILE SIZE</span>
                   <span className="text-gray-200">{pack.specs.size}</span>
                 </div>
                 <div>
-                  <span className="text-gray-500 block">COUNT</span>
+                  <span className="text-gray-500 block text-[10px]">COUNT</span>
                   <span className="text-gray-200">{pack.specs.sampleCount}</span>
                 </div>
                 <div>
-                  <span className="text-gray-500 block">DAW</span>
+                  <span className="text-gray-500 block text-[10px]">DAW</span>
                   <span className="text-gray-200">{pack.specs.daw}</span>
                 </div>
               </div>
@@ -253,10 +253,10 @@ export default function StorePage() {
                 <span className="text-[10px] font-mono uppercase tracking-wider text-gray-400 block">
                   Included in this kit:
                 </span>
-                <ul className="space-y-1 text-xs text-gray-300">
+                <ul className="space-y-1.5 text-xs text-gray-300 font-sans">
                   {pack.features.map((feature, i) => (
-                    <li key={i} className="flex items-center space-x-2">
-                      <Check className="w-3.5 h-3.5 text-cyanAccent shrink-0" />
+                    <li key={i} className="flex items-start space-x-2">
+                      <Check className="w-3.5 h-3.5 text-cyanAccent shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -265,10 +265,10 @@ export default function StorePage() {
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+            <div className="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
               <button
                 onClick={() => togglePreview(pack.id)}
-                className="px-4 py-2.5 rounded-xl text-xs font-mono text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 flex items-center space-x-2 transition-colors"
+                className="px-4 py-2.5 rounded-xl text-xs font-mono text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center space-x-2 transition-colors min-h-[44px]"
               >
                 {playingPackId === pack.id ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                 <span>{playingPackId === pack.id ? "Pause Preview" : "Audio Preview"}</span>
@@ -279,7 +279,7 @@ export default function StorePage() {
                   setActiveCheckoutPack(pack);
                   setCheckoutStep("details");
                 }}
-                className="px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyanAccent to-purpleAccent text-black hover:opacity-95 shadow-cyan-glow flex items-center space-x-2 transition-transform active:scale-95"
+                className="px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyanAccent via-purpleAccent to-crimsonAccent text-black hover:opacity-95 shadow-cyan-glow flex items-center justify-center space-x-2 transition-transform active:scale-95 min-h-[44px]"
               >
                 <Download className="w-4 h-4 text-black" />
                 <span>Get Pack</span>
@@ -290,7 +290,7 @@ export default function StorePage() {
       </div>
 
       {/* Trust & Guarantee Banner */}
-      <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+      <div className="glass-panel-premium p-6 sm:p-8 rounded-2xl border border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
         <div className="space-y-2">
           <Shield className="w-6 h-6 text-cyanAccent mx-auto" />
           <h4 className="text-sm font-bold text-white uppercase">100% Royalty Free</h4>
@@ -298,117 +298,108 @@ export default function StorePage() {
         </div>
         <div className="space-y-2">
           <Sparkles className="w-6 h-6 text-purpleAccent mx-auto" />
-          <h4 className="text-sm font-bold text-white uppercase">Instant Cloud Delivery</h4>
-          <p className="text-xs text-gray-400">High-speed download link delivered immediately to your email and on-screen upon purchase.</p>
+          <h4 className="text-sm font-bold text-white uppercase">Studio Master Quality</h4>
+          <p className="text-xs text-gray-400">24-Bit / 44.1kHz lossless WAV files engineered through analogue tube saturators.</p>
         </div>
         <div className="space-y-2">
           <Disc className="w-6 h-6 text-crimsonAccent mx-auto" />
-          <h4 className="text-sm font-bold text-white uppercase">Engineered by DJ Caat</h4>
-          <p className="text-xs text-gray-400">Authentic sound fonts, 808s, and Himalayan harmonics crafted in Darjeeling studio sessions.</p>
+          <h4 className="text-sm font-bold text-white uppercase">Instant Download</h4>
+          <p className="text-xs text-gray-400">Receive an encrypted direct cloud download link immediately after order confirmation.</p>
         </div>
       </div>
 
-      {/* CHECKOUT SIMULATOR MODAL */}
+      {/* ------------------------------------------------------------- */}
+      {/* MOBILE BOTTOM SHEET / DESKTOP MODAL CHECKOUT */}
+      {/* ------------------------------------------------------------- */}
       {activeCheckoutPack && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="glass-panel w-full max-w-lg rounded-2xl border border-cyanAccent/40 p-6 sm:p-8 space-y-6 shadow-2xl relative">
-            <button
-              onClick={() => setActiveCheckoutPack(null)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-lg font-mono"
-            >
-              ✕
-            </button>
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+          {/* Backdrop overlay */}
+          <div
+            onClick={() => setActiveCheckoutPack(null)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
+          />
+
+          {/* Bottom Sheet Card on Mobile, Centered on Desktop */}
+          <div className="relative w-full max-w-lg glass-sheet sm:rounded-2xl rounded-t-3xl border border-white/15 p-6 sm:p-8 space-y-6 shadow-2xl z-10 animate-in slide-in-from-bottom duration-200 max-h-[90vh] overflow-y-auto pb-safe">
+            {/* Mobile Sheet Handle */}
+            <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto sm:hidden mb-2" />
+
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div>
+                <span className="text-[10px] font-mono uppercase text-cyanAccent font-bold tracking-wider">
+                  INSTANT DIGITAL CHECKOUT
+                </span>
+                <h3 className="text-lg font-black text-white uppercase mt-0.5">
+                  {activeCheckoutPack.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setActiveCheckoutPack(null)}
+                className="p-2 rounded-xl bg-white/5 text-gray-400 hover:text-white"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
             {checkoutStep === "details" ? (
-              <form onSubmit={handleCheckoutSubmit} className="space-y-5">
-                <div className="space-y-1">
-                  <span className="text-[10px] font-mono text-cyanAccent uppercase tracking-widest">
-                    SECURE DIGITAL CHECKOUT
-                  </span>
-                  <h3 className="text-2xl font-black text-white">{activeCheckoutPack.title}</h3>
-                  <p className="text-xs text-gray-400">{activeCheckoutPack.specs.sampleCount}</p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-void/80 border border-white/5 flex items-center justify-between font-mono">
-                  <span className="text-xs text-gray-400">TOTAL DUE:</span>
-                  <span className="text-xl font-bold text-cyanAccent">
-                    {currency === "USD" ? `$${activeCheckoutPack.priceUsd}.00 USD` : `₹${activeCheckoutPack.priceInr} INR`}
+              <form onSubmit={handleCheckoutSubmit} className="space-y-4">
+                <div className="p-3.5 rounded-xl bg-void/60 border border-white/5 flex items-center justify-between text-xs font-mono">
+                  <span className="text-gray-400">Total Payable:</span>
+                  <span className="text-base font-bold text-cyanAccent">
+                    {currency === "USD" ? `$${activeCheckoutPack.priceUsd}` : `₹${activeCheckoutPack.priceInr}`}
                   </span>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-mono text-gray-300">
-                    Your Delivery Email Address
+                <div className="space-y-1.5">
+                  <label className="text-xs font-mono text-gray-300 block">
+                    Your Email (For Instant Download Link) <span className="text-crimsonAccent">*</span>
                   </label>
                   <input
                     type="email"
+                    inputMode="email"
                     required
-                    placeholder="producer@studio.com"
+                    placeholder="producer@example.com"
                     value={buyerEmail}
                     onChange={(e) => setBuyerEmail(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-void border border-white/10 text-white text-sm focus:border-cyanAccent focus:outline-none"
+                    className="w-full px-4 py-3 rounded-xl bg-void border border-white/10 text-white text-base sm:text-sm focus:border-cyanAccent focus:outline-none transition-colors min-h-[48px]"
                   />
-                  <p className="text-[10px] text-gray-500 font-mono">
-                    Instant lossless ZIP download link will be dispatched to this email.
-                  </p>
                 </div>
 
-                <div className="pt-2">
+                <div className="space-y-2 pt-2">
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyanAccent via-purpleAccent to-crimsonAccent text-black hover:opacity-95 shadow-cyan-glow transition-transform active:scale-98"
+                    className="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyanAccent via-purpleAccent to-crimsonAccent text-black shadow-cyan-glow hover:opacity-95 transition-transform active:scale-95 min-h-[48px] flex items-center justify-center space-x-2"
                   >
-                    Confirm Order & Unlock Download
+                    <Lock className="w-4 h-4" />
+                    <span>Proceed to Instant Download</span>
                   </button>
-                </div>
-
-                <div className="text-center text-[10px] font-mono text-gray-500 flex items-center justify-center space-x-2">
-                  <span>Secured via Stripe / Lemon Squeezy / Razorpay Architecture</span>
+                  <p className="text-[10px] font-mono text-gray-500 text-center">
+                    Simulated fast checkout. In production, this connects to Stripe, LemonSqueezy, or Razorpay.
+                  </p>
                 </div>
               </form>
             ) : (
-              <div className="text-center space-y-5 py-4">
-                <div className="w-16 h-16 rounded-full bg-cyanAccent/20 text-cyanAccent flex items-center justify-center mx-auto border border-cyanAccent/40">
-                  <Check className="w-8 h-8" />
+              <div className="text-center space-y-4 py-4 animate-in fade-in">
+                <div className="w-14 h-14 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mx-auto border border-green-500/30">
+                  <Check className="w-7 h-7" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-2xl font-black text-white uppercase">Download Ready!</h3>
+                  <h4 className="text-xl font-black text-white uppercase">Vault Access Granted!</h4>
                   <p className="text-xs text-gray-300 max-w-sm mx-auto">
-                    Your download link has been prepared and dispatched to <strong className="text-cyanAccent">{buyerEmail}</strong>.
+                    A direct download link for <strong>{activeCheckoutPack.title}</strong> has been sent to <strong className="text-cyanAccent">{buyerEmail}</strong>.
                   </p>
                 </div>
-
-                <div className="p-4 rounded-xl bg-void/80 border border-white/5 space-y-2 text-left text-xs font-mono">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Item:</span>
-                    <span className="text-white">{activeCheckoutPack.title}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Format:</span>
-                    <span className="text-cyanAccent">{activeCheckoutPack.specs.format}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">License:</span>
-                    <span className="text-green-400">Commercial Royalty-Free</span>
-                  </div>
-                </div>
-
-                <a
-                  href="/audio/yoi-yoi.wav"
-                  download="dj-caat-sample-pack-demo.wav"
-                  className="inline-flex items-center space-x-2 px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-wider bg-cyanAccent text-black shadow-cyan-glow hover:opacity-95"
-                >
-                  <Download className="w-4 h-4 fill-black" />
-                  <span>Download Master Pack (.ZIP)</span>
-                </a>
-
-                <div>
-                  <button
-                    onClick={() => setActiveCheckoutPack(null)}
-                    className="text-xs font-mono text-gray-400 hover:text-white"
+                <div className="pt-2">
+                  <a
+                    href={activeCheckoutPack.audioPreview}
+                    download
+                    className="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-cyanAccent text-black shadow-cyan-glow flex items-center justify-center space-x-2 min-h-[48px]"
                   >
-                    Close Window
-                  </button>
+                    <Download className="w-4 h-4" />
+                    <span>Download Sample Pack Now</span>
+                  </a>
                 </div>
               </div>
             )}

@@ -151,7 +151,7 @@ OFFICIAL EMAIL: ceo@gorkhayai.com | PHONE: +91 9773976436
 GSTIN: 19BJLPB8509E1Z6 | PAN: BJLPB8509E | Udyam: UDYAM-WB-06-0061257
 Darjeeling, West Bengal - 734213
 
-CLIENT (CONFIDENTIAL): DJ CAAT (Deep Gadhaily)
+CLIENT (CONFIDENTIAL): DJ CAAT
 [IDENTITY PROTECTED UNDER NDA - CONFIDENTIAL ARTIST PERSONA]
 PROJECT: DJ CAAT Official Artist Platform & 808 Phonk Engine
 
@@ -376,7 +376,6 @@ Contact: ceo@gorkhayai.com`;
                 </div>
                 <p className="text-base font-black text-white print:text-black uppercase flex items-center gap-2">
                   <span>DJ CAAT</span>
-                  <span className="text-xs font-normal text-gray-400 print:text-gray-600">(Deep Gadhaily)</span>
                 </p>
                 <p className="text-[11px] text-gray-400 print:text-gray-600 leading-tight">
                   Music Producer & Sound Designer (33.3K+ Instagram Artist) • <em>Real name & face protected under NDA</em>
@@ -414,8 +413,8 @@ Contact: ceo@gorkhayai.com`;
             </div>
           </div>
 
-          {/* LINE ITEMS TABLE */}
-          <div className="py-6 overflow-x-auto">
+          {/* LINE ITEMS TABLE (Desktop & Print) */}
+          <div className="py-6 hidden sm:block overflow-x-auto print:block">
             <table className="w-full text-left text-xs font-mono">
               <thead>
                 <tr className="border-b-2 border-white/10 print:border-gray-400 text-gray-400 print:text-gray-700 uppercase tracking-wider text-[11px]">
@@ -483,6 +482,38 @@ Contact: ceo@gorkhayai.com`;
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* LINE ITEMS CARDS (Mobile Phone View < sm) */}
+          <div className="py-4 space-y-3 sm:hidden print:hidden">
+            {serviceItems.map((item) => (
+              <div key={item.no} className="p-4 rounded-xl bg-void/80 border border-white/10 space-y-2 text-xs font-mono">
+                <div className="flex items-start justify-between gap-2">
+                  <span className="text-cyanAccent font-bold">#{item.no}</span>
+                  <span className="font-bold text-white text-right">{formatMoney(item.amountInr, item.amountUsd)}</span>
+                </div>
+                <h4 className="font-bold text-white font-sans text-sm">{item.title}</h4>
+                <p className="text-gray-400 font-sans text-xs leading-relaxed">{item.specs}</p>
+                <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] text-gray-400">
+                  <span>SAC: {item.sac}</span>
+                  <span>Est. Hours: {item.hours}h</span>
+                </div>
+              </div>
+            ))}
+
+            {/* Domain Card */}
+            <div className="p-4 rounded-xl bg-cyanAccent/10 border border-cyanAccent/40 space-y-2 text-xs font-mono shadow-cyan-glow">
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-cyanAccent font-black">#{domainItem.no}</span>
+                <span className="font-black text-cyanAccent text-right">{formatMoney(domainItem.amountInr, domainItem.amountUsd)}</span>
+              </div>
+              <h4 className="font-bold text-cyanAccent font-sans text-sm">{domainItem.title}</h4>
+              <p className="text-gray-300 font-sans text-xs leading-relaxed">{domainItem.specs}</p>
+              <div className="pt-2 border-t border-cyanAccent/20 flex items-center justify-between text-[11px] text-cyanAccent">
+                <span>SAC: {domainItem.sac}</span>
+                <span>Term: 1 Year (100% Upfront)</span>
+              </div>
+            </div>
           </div>
 
           {/* FINANCIAL SUMMARY & MILESTONES */}
@@ -626,7 +657,7 @@ Contact: ceo@gorkhayai.com`;
           <div className="border-t border-white/10 print:border-gray-400 pt-8 mt-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 font-mono text-xs">
             <div className="space-y-1 text-gray-400 print:text-gray-600 max-w-sm text-[10px]">
               <p className="font-bold text-gray-300 print:text-black">Terms & Declarations:</p>
-              <p>1. <strong>Confidentiality:</strong> Client identity (Deep Gadhaily) and persona details are strictly confidential.</p>
+              <p>1. <strong>Confidentiality:</strong> Client identity and persona details are strictly confidential.</p>
               <p>2. <strong>Domain Booking:</strong> Domain djcaat.com will be registered immediately upon Milestone 1 payment.</p>
               <p>3. <strong>Intellectual Property:</strong> 100% source code ownership transferred upon final settlement.</p>
             </div>

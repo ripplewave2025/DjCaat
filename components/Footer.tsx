@@ -5,7 +5,7 @@ import { ARTIST_INFO } from "@/lib/tracks";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-void/90 relative z-10 pt-12 pb-8">
+    <footer className="border-t border-white/10 bg-void/95 relative z-10 pt-12 pb-28 lg:pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/5">
           {/* Col 1: Bio */}
@@ -59,6 +59,17 @@ export default function Footer() {
                 aria-label="SoundCloud"
               >
                 <span className="text-[10px] font-black">SC</span>
+              </a>
+              <a
+                href={ARTIST_INFO.twitter}
+                target="_blank"
+                rel="noreferrer"
+                className="w-8 h-8 rounded-lg bg-white/5 hover:bg-orange-500/20 flex items-center justify-center text-gray-300 hover:text-orange-400 transition-colors border border-white/5 hover:border-orange-500/30"
+                aria-label="Twitter / X"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
               </a>
             </div>
           </div>

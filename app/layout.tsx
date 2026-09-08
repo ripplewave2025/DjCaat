@@ -1,7 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MobileBottomNav from "@/components/MobileBottomNav";
+
+export const viewport: Viewport = {
+  themeColor: "#08080a",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://djcaat.com"),
@@ -16,6 +25,7 @@ export const metadata: Metadata = {
     "Himalayan Drift",
     "Nepamorphosis",
     "Timro Yaad Ma",
+    "Montagem CJP",
     "Phonk Producer",
     "Audio Visualizer"
   ],
@@ -39,13 +49,16 @@ export default function RootLayout({
         <div className="fixed inset-0 cyber-grid pointer-events-none z-0 opacity-40" />
         <div className="fixed inset-0 crt-overlay pointer-events-none z-50 opacity-25" />
 
-        {/* Global Navigation */}
+        {/* Global Desktop & Mobile Top Navigation */}
         <Navbar />
 
-        {/* Main Content Area */}
-        <main className="flex-1 relative z-10">
+        {/* Main Content Area with mobile bottom nav clearance */}
+        <main className="flex-1 relative z-10 pb-16 lg:pb-0">
           {children}
         </main>
+
+        {/* Sticky Thumb-Zone Mobile Bottom Navigation */}
+        <MobileBottomNav />
 
         {/* Global Footer */}
         <Footer />

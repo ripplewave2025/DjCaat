@@ -2,15 +2,18 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { FileText, CheckCircle2, Globe, Server, ShieldCheck, Lock, KeyRound, Printer, ArrowRight, Sparkles, LogOut } from "lucide-react";
+import { FileText, CheckCircle2, Globe, Server, ShieldCheck, Lock, User, Eye, EyeOff, Printer, ArrowRight, Sparkles, LogOut, ShieldAlert } from "lucide-react";
 
 export default function AdminPlanPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [pinInput, setPinInput] = useState("");
-  const [pinError, setPinError] = useState(false);
+  const [usernameInput, setUsernameInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState(false);
   const [currency, setCurrency] = useState<"USD" | "INR">("USD");
 
-  const DEFAULT_PIN = "7777";
+  const VALID_USERNAME = "DJCaat";
+  const VALID_PASSWORD = "DJCaat!@#0070";
   const exchangeRate = 83.4; // 1 USD = ~83.4 INR
 
   useEffect(() => {
@@ -23,21 +26,22 @@ export default function AdminPlanPage() {
     }
   }, []);
 
-  const handlePinSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (pinInput === DEFAULT_PIN || pinInput === "caat2026") {
+    if (usernameInput === VALID_USERNAME && passwordInput === VALID_PASSWORD) {
       setIsAuthenticated(true);
-      setPinError(false);
+      setAuthError(false);
       sessionStorage.setItem("caat_mgmt_auth", "true");
     } else {
-      setPinError(true);
+      setAuthError(true);
     }
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     sessionStorage.removeItem("caat_mgmt_auth");
-    setPinInput("");
+    setUsernameInput("");
+    setPasswordInput("");
   };
 
   const formatPrice = (usd: number) => {
@@ -106,60 +110,93 @@ export default function AdminPlanPage() {
   const totalEstimateUsd = subtotalUsd - discountUsd;
 
   // -------------------------------------------------------------
-  // PIN LOCK GATE (Owner Only)
+  // PRIVATE CREDENTIAL GATE (Owner Only: DJCaat / DJCaat!@#0070)
   // -------------------------------------------------------------
   if (!isAuthenticated) {
     return (
-      <div className="min-h-[75vh] flex items-center justify-center px-4">
-        <div className="glass-panel w-full max-w-md p-8 rounded-2xl border border-cyanAccent/30 shadow-cyan-glow space-y-6 text-center">
+      <div className="min-h-[75vh] flex items-center justify-center px-4 py-8">
+        <div className="glass-panel-premium w-full max-w-md p-6 sm:p-8 rounded-2xl border border-cyanAccent/30 shadow-cyan-glow space-y-6 text-center">
           <div className="w-14 h-14 rounded-full bg-cyanAccent/15 text-cyanAccent flex items-center justify-center mx-auto border border-cyanAccent/30">
             <Lock className="w-6 h-6" />
           </div>
 
-          <div className="space-y-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-cyanAccent block">
-              RESTRICTED NODE // ARTIST & MGMT ONLY
+          <div className="space-y-1.5">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-cyanAccent font-bold block">
+              RESTRICTED NODE // OWNER ACCESS ONLY
             </span>
-            <h1 className="text-2xl font-black text-white uppercase">
+            <h1 className="text-2xl font-black text-white uppercase tracking-tight">
               Project & Commercial Plan
             </h1>
-            <p className="text-xs text-gray-400">
-              Enter owner access code to view commercial proposal, itemized budget, and domain architecture.
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Enter verified owner credentials to unlock the commercial proposal, itemized deliverables, and cloud architecture.
             </p>
           </div>
 
-          <form onSubmit={handlePinSubmit} className="space-y-4">
-            <div className="relative">
-              <input
-                type="password"
-                maxLength={10}
-                placeholder="Enter Access PIN"
-                value={pinInput}
-                onChange={(e) => {
-                  setPinInput(e.target.value);
-                  setPinError(false);
-                }}
-                className="w-full px-4 py-3 rounded-xl bg-void border border-white/15 text-center text-lg font-mono tracking-widest text-white focus:border-cyanAccent focus:outline-none transition-colors"
-              />
-              <KeyRound className="w-4 h-4 text-gray-500 absolute left-4 top-3.5" />
+          <form onSubmit={handleLoginSubmit} className="space-y-4 text-left">
+            {/* Username Input */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-mono text-gray-300 block">Owner Username</label>
+              <div className="relative">
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter Username"
+                  value={usernameInput}
+                  onChange={(e) => {
+                    setUsernameInput(e.target.value);
+                    setAuthError(false);
+                  }}
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-void/90 border border-white/15 text-white text-base sm:text-sm font-mono focus:border-cyanAccent focus:outline-none transition-colors min-h-[48px]"
+                />
+                <User className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+              </div>
             </div>
 
-            {pinError && (
-              <p className="text-xs font-mono text-crimsonAccent">
-                Invalid passcode. Please enter correct PIN.
-              </p>
+            {/* Password Input */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-mono text-gray-300 block">Owner Password</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  placeholder="Enter Password"
+                  value={passwordInput}
+                  onChange={(e) => {
+                    setPasswordInput(e.target.value);
+                    setAuthError(false);
+                  }}
+                  className="w-full pl-11 pr-11 py-3 rounded-xl bg-void/90 border border-white/15 text-white text-base sm:text-sm font-mono focus:border-cyanAccent focus:outline-none transition-colors min-h-[48px]"
+                />
+                <Lock className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white p-1"
+                  aria-label="Toggle password visibility"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {authError && (
+              <div className="p-3 rounded-xl bg-crimsonAccent/15 border border-crimsonAccent/30 flex items-center gap-2 text-xs font-mono text-crimsonAccent">
+                <ShieldAlert className="w-4 h-4 shrink-0" />
+                <span>Access Denied: Invalid owner username or password.</span>
+              </div>
             )}
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider bg-cyanAccent text-black hover:opacity-90 shadow-cyan-glow transition-transform active:scale-98"
+              className="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyanAccent via-purpleAccent to-crimsonAccent text-black hover:opacity-95 shadow-cyan-glow transition-transform active:scale-95 min-h-[48px] flex items-center justify-center space-x-2"
             >
-              Unlock Project Plan
+              <Lock className="w-4 h-4 text-black" />
+              <span>Authenticate & Unlock Plan</span>
             </button>
           </form>
 
-          <p className="text-[10px] font-mono text-gray-600">
-            Default owner PIN: <span className="text-gray-400 font-bold">7777</span>
+          <p className="text-[10px] font-mono text-gray-500">
+            Protected by multi-tier credential authentication. Unauthorised access is prohibited.
           </p>
         </div>
       </div>
@@ -266,8 +303,8 @@ export default function AdminPlanPage() {
           </div>
         </div>
 
-        {/* Itemized Table */}
-        <div className="overflow-x-auto">
+        {/* Itemized Table (Desktop & Print) */}
+        <div className="hidden sm:block overflow-x-auto print:block">
           <table className="w-full text-left text-xs font-mono">
             <thead>
               <tr className="border-b border-white/10 text-gray-400 uppercase tracking-wider">
@@ -293,6 +330,24 @@ export default function AdminPlanPage() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Itemized Cards (Mobile View < sm) */}
+        <div className="sm:hidden space-y-3 print:hidden">
+          {invoiceItems.map((item) => (
+            <div key={item.no} className="p-4 rounded-xl bg-void/80 border border-white/10 space-y-2 text-xs font-mono">
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-cyanAccent font-bold">#{item.no}</span>
+                <span className="font-bold text-white text-right">{formatPrice(item.amountUsd)}</span>
+              </div>
+              <h4 className="font-bold text-white font-sans text-sm">{item.title}</h4>
+              <p className="text-gray-400 font-sans text-xs leading-relaxed">{item.specs}</p>
+              <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] text-gray-400">
+                <span>Estimated Hours:</span>
+                <span className="text-cyanAccent">{item.hours}h</span>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Calculation Summary */}

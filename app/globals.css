@@ -7,11 +7,26 @@
   --foreground: #f3f4f6;
 }
 
+html {
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Safe Area Inset Helpers for iOS Notch & Home Bar */
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.pt-safe {
+  padding-top: max(0.5rem, env(safe-area-inset-top));
 }
 
 /* CRT Scanline Overlay */
@@ -56,27 +71,24 @@ body {
   background: #00f0ff;
 }
 
-/* Neon Glows & Utilities */
-.neon-border-cyan {
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-}
-
-.neon-border-purple {
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
-}
-
-.neon-border-crimson {
-  border: 1px solid rgba(255, 0, 85, 0.3);
-  box-shadow: 0 0 15px rgba(255, 0, 85, 0.15);
-}
-
+/* Glassmorphism Design System Tokens */
 .glass-panel {
-  background: rgba(17, 17, 22, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(17, 17, 24, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-premium {
+  background: linear-gradient(
+    135deg,
+    rgba(22, 22, 32, 0.85) 0%,
+    rgba(13, 13, 20, 0.92) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .glass-panel-hover {
@@ -84,8 +96,67 @@ body {
 }
 
 .glass-panel-hover:hover {
-  background: rgba(22, 22, 30, 0.9);
+  background: rgba(26, 26, 38, 0.9);
   border-color: rgba(0, 240, 255, 0.35);
-  box-shadow: 0 8px 30px rgba(0, 240, 255, 0.12);
+  box-shadow: 0 10px 35px rgba(0, 240, 255, 0.14);
   transform: translateY(-2px);
+}
+
+.glass-sheet {
+  background: rgba(14, 14, 20, 0.95);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Neon Glows */
+.shadow-cyan-glow {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+}
+
+.shadow-purple-glow {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+}
+
+.shadow-crimson-glow {
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.25);
+}
+
+/* Touch-Optimized Range Sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+  box-shadow: 0 0 16px #00f0ff;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+  border: 2px solid #ffffff;
+  cursor: pointer;
 }

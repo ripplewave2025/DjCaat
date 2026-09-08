@@ -1,12 +1,24 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FileText, Download, ShieldCheck, Mail, MapPin, Music, Instagram, Youtube, ExternalLink, Globe, Sparkles, Award } from "lucide-react";
-import { ARTIST_INFO, TRACKS } from "@/lib/tracks";
+import { FileText, Download, ShieldCheck, Mail, MapPin, Music, Instagram, Youtube, ExternalLink, Globe, Sparkles, Award, Copy, Check, Disc3 } from "lucide-react";
+import { ARTIST_INFO, DISTRO_RELEASES } from "@/lib/tracks";
 
 export default function EpkPage() {
+  const [copiedIsrc, setCopiedIsrc] = useState<string | null>(null);
+
+  const handleCopyIsrc = (isrc: string) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(isrc);
+      setCopiedIsrc(isrc);
+      setTimeout(() => setCopiedIsrc(null), 2000);
+    }
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 pb-24 space-y-12 sm:space-y-16">
       {/* Top Banner */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
         <div>
@@ -26,7 +38,7 @@ export default function EpkPage() {
           <a
             href="/images/nepamorphosis.jpg"
             download="dj-caat-press-photo.jpg"
-            className="px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-cyanAccent text-black shadow-cyan-glow flex items-center space-x-2 hover:opacity-90"
+            className="w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-cyanAccent text-black shadow-cyan-glow flex items-center justify-center space-x-2 hover:opacity-90 active:scale-95 transition-all min-h-[44px]"
           >
             <Download className="w-4 h-4" />
             <span>Download Press Kit</span>
@@ -35,41 +47,41 @@ export default function EpkPage() {
       </div>
 
       {/* Verified Metrics Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-panel p-6 rounded-2xl border border-white/5 space-y-2 text-center">
-          <div className="flex items-center justify-center space-x-1 text-cyanAccent text-xs font-mono">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="glass-panel-premium p-5 sm:p-6 rounded-2xl border border-white/10 space-y-2 text-center shadow-lg">
+          <div className="flex items-center justify-center space-x-1 text-cyanAccent text-[11px] font-mono">
             <Instagram className="w-3.5 h-3.5" />
             <span>INSTAGRAM</span>
           </div>
-          <div className="text-3xl sm:text-4xl font-black text-white font-mono">33.3K+</div>
-          <p className="text-[11px] text-gray-400 font-mono">Underground Organic Reach</p>
+          <div className="text-2xl sm:text-4xl font-black text-white font-mono">{ARTIST_INFO.followers}</div>
+          <p className="text-[10px] sm:text-[11px] text-gray-400 font-mono">Organic Community</p>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl border border-white/5 space-y-2 text-center">
-          <div className="flex items-center justify-center space-x-1 text-purpleAccent text-xs font-mono">
+        <div className="glass-panel-premium p-5 sm:p-6 rounded-2xl border border-white/10 space-y-2 text-center shadow-lg">
+          <div className="flex items-center justify-center space-x-1 text-purpleAccent text-[11px] font-mono">
             <Music className="w-3.5 h-3.5" />
             <span>MONTHLY STREAMS</span>
           </div>
-          <div className="text-3xl sm:text-4xl font-black text-white font-mono">100K+</div>
-          <p className="text-[11px] text-gray-400 font-mono">Cross-Platform Listens</p>
+          <div className="text-2xl sm:text-4xl font-black text-white font-mono">{ARTIST_INFO.streams}</div>
+          <p className="text-[10px] sm:text-[11px] text-gray-400 font-mono">Cross-Platform Listens</p>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl border border-white/5 space-y-2 text-center">
-          <div className="flex items-center justify-center space-x-1 text-crimsonAccent text-xs font-mono">
+        <div className="glass-panel-premium p-5 sm:p-6 rounded-2xl border border-white/10 space-y-2 text-center shadow-lg">
+          <div className="flex items-center justify-center space-x-1 text-crimsonAccent text-[11px] font-mono">
             <Globe className="w-3.5 h-3.5" />
             <span>TOP REGIONS</span>
           </div>
-          <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1">IN • BR • NP • US</div>
-          <p className="text-[11px] text-gray-400 font-mono">Global Phonk Listenership</p>
+          <div className="text-base sm:text-xl font-bold text-white font-mono mt-1">IN • BR • NP • US</div>
+          <p className="text-[10px] sm:text-[11px] text-gray-400 font-mono">Global Phonk Reach</p>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl border border-white/5 space-y-2 text-center">
-          <div className="flex items-center justify-center space-x-1 text-green-400 text-xs font-mono">
+        <div className="glass-panel-premium p-5 sm:p-6 rounded-2xl border border-white/10 space-y-2 text-center shadow-lg">
+          <div className="flex items-center justify-center space-x-1 text-green-400 text-[11px] font-mono">
             <MapPin className="w-3.5 h-3.5" />
             <span>HERITAGE BASE</span>
           </div>
-          <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">DARJEELING</div>
-          <p className="text-[11px] text-gray-400 font-mono">West Bengal, India</p>
+          <div className="text-lg sm:text-2xl font-black text-white font-mono mt-1">DARJEELING</div>
+          <p className="text-[10px] sm:text-[11px] text-gray-400 font-mono">West Bengal, India</p>
         </div>
       </div>
 
@@ -95,18 +107,14 @@ export default function EpkPage() {
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs font-mono">
+          <div className="p-4 rounded-2xl glass-panel-premium border border-white/10 space-y-2 text-xs font-mono">
             <div className="flex justify-between">
-              <span className="text-gray-400">Legal Name / Rep:</span>
-              <span className="text-white">Upesh Bishwakarma</span>
+              <span className="text-gray-400">Artist / Producer:</span>
+              <span className="text-white font-bold">{ARTIST_INFO.name}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Primary Genres:</span>
               <span className="text-cyanAccent">Nepali Phonk / Brazilian Phonk</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Production DAW:</span>
-              <span className="text-white">FL Studio / Custom DSP Chains</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Management Contact:</span>
@@ -121,12 +129,12 @@ export default function EpkPage() {
             <span className="text-xs font-mono uppercase tracking-widest text-cyanAccent">
               ARCHITECTURAL LORE // THE SOUND OF THE HILLS
             </span>
-            <h2 className="text-3xl font-black text-white uppercase">
+            <h2 className="text-2xl sm:text-3xl font-black text-white uppercase">
               Himalayan Harmonics Colliding with Favela Sub-Bass
             </h2>
           </div>
 
-          <div className="prose prose-invert text-gray-300 text-sm leading-relaxed space-y-4 font-normal">
+          <div className="text-gray-300 text-xs sm:text-sm leading-relaxed space-y-4 font-normal">
             <p>
               Born and based in <strong>Darjeeling, West Bengal, India</strong>, <strong>DJ Caat</strong> stands as one of the definitive architects of South Asian underground electronic music. While the global phonk movement surged across Eastern Europe and Latin America, Caat engineered an unmistakable signature: welding the melancholic, haunting modal scales of traditional Nepali and Himalayan folk with the explosive, syncopated 808 pressure of Brazilian Phonk and Memphis drift rap.
             </p>
@@ -137,123 +145,108 @@ export default function EpkPage() {
               Operating with meticulous craftsmanship from his Darjeeling studio while pursuing academic university studies, DJ Caat maintains a disciplined production schedule. Stems, vocal capelas, and collaborative inquiries are channeled directly into his custom production intake pipeline, guaranteeing high-fidelity output for every official release.
             </p>
           </div>
+        </div>
+      </div>
 
-          {/* Key Master Releases */}
-          <div className="space-y-3 pt-2">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-purpleAccent">
-              Essential Discography For Sync & Licensing
+      {/* ------------------------------------------------------------- */}
+      {/* OFFICIAL DISCOGRAPHY & REPERTOIRE CATALOG */}
+      {/* ------------------------------------------------------------- */}
+      <div className="glass-panel-premium rounded-2xl border border-white/10 p-6 sm:p-8 space-y-6 shadow-2xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-4">
+          <div>
+            <div className="flex items-center space-x-2 text-xs font-mono uppercase tracking-widest text-cyanAccent">
+              <ShieldCheck className="w-4 h-4 text-green-400" />
+              <span>Verified Catalog & Repertoire</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-white uppercase mt-0.5">
+              Official Master Catalog
             </h3>
-            <div className="space-y-2">
-              {TRACKS.map((t) => (
-                <div
-                  key={t.id}
-                  className="p-3.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between hover:border-cyanAccent/30 transition-colors"
-                >
-                  <div className="flex items-center space-x-3">
-                    <Music className="w-4 h-4 text-cyanAccent" />
-                    <div>
-                      <span className="text-sm font-bold text-white block">{t.title}</span>
-                      <span className="text-[10px] font-mono text-gray-400">
-                        {t.genre} • {t.bpm} BPM • {t.key} • {t.origin}
-                      </span>
-                    </div>
-                  </div>
-                  <Link
-                    href="/visualizer"
-                    className="text-xs font-mono text-cyanAccent hover:underline"
-                  >
-                    Listen →
-                  </Link>
+          </div>
+          <span className="text-xs font-mono text-gray-400">
+            Artist: <strong className="text-white">DJ Caat</strong> • {DISTRO_RELEASES.length} Registered Masters
+          </span>
+        </div>
+
+        {/* Desktop Table View */}
+        <div className="hidden sm:block overflow-x-auto">
+          <table className="w-full text-left text-xs font-mono">
+            <thead>
+              <tr className="border-b border-white/10 text-gray-400 uppercase tracking-wider">
+                <th className="py-3 px-3">#</th>
+                <th className="py-3 px-3">Master Title</th>
+                <th className="py-3 px-3">Subgenre</th>
+                <th className="py-3 px-3">BPM & Key</th>
+                <th className="py-3 px-3">Available Editions</th>
+                <th className="py-3 px-3">Release Date</th>
+                <th className="py-3 px-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {DISTRO_RELEASES.map((r) => {
+                const editions = r.versions.map((v) => v.versionTitle).join(", ");
+                return (
+                  <tr key={r.id} className="hover:bg-white/[0.02] transition-colors">
+                    <td className="py-3 px-3 text-cyanAccent font-bold">#{r.slNo}</td>
+                    <td className="py-3 px-3 font-bold text-white">{r.title}</td>
+                    <td className="py-3 px-3 text-purpleAccent">{r.subgenre}</td>
+                    <td className="py-3 px-3 text-gray-300">{r.bpm} BPM • {r.key}</td>
+                    <td className="py-3 px-3 text-gray-400 truncate max-w-xs">{editions}</td>
+                    <td className="py-3 px-3 text-gray-400">{r.releaseDate}</td>
+                    <td className="py-3 px-3 text-right">
+                      <Link
+                        href={`/visualizer?track=${encodeURIComponent(r.id)}`}
+                        className="px-2.5 py-1 rounded-lg bg-cyanAccent/15 text-cyanAccent hover:bg-cyanAccent hover:text-black transition-colors inline-flex items-center gap-1 text-[11px] font-bold"
+                      >
+                        <Disc3 className="w-3 h-3" />
+                        <span>Visualizer</span>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile Stacked Card View */}
+        <div className="sm:hidden space-y-3">
+          {DISTRO_RELEASES.map((r) => {
+            const editions = r.versions.map((v) => v.versionTitle).join(", ");
+            return (
+              <div
+                key={r.id}
+                className="p-4 rounded-xl bg-void/80 border border-white/5 space-y-2 text-xs font-mono"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-cyanAccent font-bold">#{r.slNo} • {r.title}</span>
+                  <span className="text-[10px] text-gray-400">{r.releaseDate}</span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Brand Assets Vault */}
-      <div className="glass-panel p-8 rounded-2xl border border-white/10 space-y-6">
-        <div className="space-y-2">
-          <span className="text-xs font-mono uppercase tracking-widest text-cyanAccent">
-            BRAND ASSETS VAULT
-          </span>
-          <h2 className="text-2xl font-black text-white uppercase">
-            Official Logos, Artwork & Event Media Pack
-          </h2>
-          <p className="text-xs text-gray-400">
-            For use by event organizers, festival promoters, designers, and video editors. Do not alter aspect ratios or colors without permission.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-void border border-white/10 space-y-3">
-            <div className="h-28 flex items-center justify-center bg-white/5 rounded-lg font-black text-2xl tracking-widest text-white">
-              DJ CAAT
-            </div>
-            <div className="flex justify-between items-center text-xs font-mono">
-              <span className="text-gray-400">Vector Wordmark</span>
-              <a href="/images/nepamorphosis.jpg" download className="text-cyanAccent hover:underline">
-                PNG / SVG
-              </a>
-            </div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-void border border-white/10 space-y-3">
-            <div className="h-28 flex items-center justify-center bg-white/5 rounded-lg relative overflow-hidden">
-              <Image src="/images/timro-yaad-ma.png" alt="Timro Yaad Ma Cover" fill className="object-cover" />
-            </div>
-            <div className="flex justify-between items-center text-xs font-mono">
-              <span className="text-gray-400">Timro Yaad Ma High-Res</span>
-              <a href="/images/timro-yaad-ma.png" download className="text-cyanAccent hover:underline">
-                Download
-              </a>
-            </div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-void border border-white/10 space-y-3">
-            <div className="h-28 flex items-center justify-center bg-white/5 rounded-lg relative overflow-hidden">
-              <Image src="/images/gen-z-funk.jpg" alt="Gen Z Funk Cover" fill className="object-cover" />
-            </div>
-            <div className="flex justify-between items-center text-xs font-mono">
-              <span className="text-gray-400">Gen Z Funk High-Res</span>
-              <a href="/images/gen-z-funk.jpg" download className="text-cyanAccent hover:underline">
-                Download
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Sync Licensing & Management Routing */}
-      <div className="glass-panel p-8 rounded-2xl border border-purpleAccent/30 space-y-6">
-        <div className="space-y-2">
-          <span className="text-xs font-mono uppercase tracking-widest text-purpleAccent">
-            SYNC LICENSING & BOOKINGS
-          </span>
-          <h2 className="text-2xl font-black text-white uppercase">
-            Commercial Music Placement
-          </h2>
-          <p className="text-xs text-gray-400 max-w-2xl">
-            DJ Caat’s catalog is available for sync licensing across video game soundtracks (drift, racing, combat titles), extreme sports reels, automotive campaigns, and indie cinema. Master and publishing rights are consolidated for rapid 24-48 hour turnaround.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-          <div className="p-4 rounded-xl bg-void border border-white/10 space-y-1">
-            <span className="text-[10px] font-mono text-gray-500 uppercase">Management & Agency Bookings</span>
-            <p className="text-sm font-mono text-white flex items-center space-x-2">
-              <Mail className="w-4 h-4 text-cyanAccent" />
-              <span>{ARTIST_INFO.mgmtEmail}</span>
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-void border border-white/10 space-y-1">
-            <span className="text-[10px] font-mono text-gray-500 uppercase">Stems, Capelas & Producer Inquiries</span>
-            <p className="text-sm font-mono text-white flex items-center space-x-2">
-              <Mail className="w-4 h-4 text-purpleAccent" />
-              <span>{ARTIST_INFO.email}</span>
-            </p>
-          </div>
+                <div className="flex items-center justify-between text-gray-400">
+                  <span className="text-purpleAccent">{r.subgenre}</span>
+                  <span className="text-gray-300 text-[11px]">{r.bpm} BPM • {r.key}</span>
+                </div>
+                <p className="text-[10px] text-gray-500 truncate">Editions: {editions}</p>
+                <div className="pt-2 flex items-center justify-between border-t border-white/5">
+                  <Link
+                    href={`/visualizer?track=${encodeURIComponent(r.id)}`}
+                    className="px-3 py-1.5 rounded-lg bg-cyanAccent text-black font-bold text-[11px] flex items-center gap-1"
+                  >
+                    <Disc3 className="w-3 h-3" />
+                    <span>Test in Visualizer</span>
+                  </Link>
+                  <a
+                    href={r.spotifyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-xs text-gray-400 hover:text-green-400 flex items-center gap-1"
+                  >
+                    <span>Spotify</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
