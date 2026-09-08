@@ -1,6 +1,7 @@
 // Lightweight direct REST client for Supabase (Zero external bundle weight)
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://bbkxyxbbegpcvfiarlmg.supabase.co";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJia3h5eGJiZWdwY3ZmaWFybG1nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NjMxODgsImV4cCI6MjEwNDQzOTE4OH0.JaB9kD3ikSAxHUk2Eq7D8x51eHwEUXUpnM6a4GBfmjw";
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
 
 export interface CollabSubmissionPayload {
   ticket_id: string;
@@ -32,8 +33,8 @@ export async function insertCollabSubmission(payload: CollabSubmissionPayload) {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/collab_submissions`, {
       method: "POST",
       headers: {
-        "apikey": SUPABASE_ANON_KEY,
-        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
         "Content-Type": "application/json",
         "Prefer": "return=representation",
       },
@@ -62,8 +63,8 @@ export async function insertAnalyticsClick(payload: AnalyticsClickPayload) {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/analytics_clicks`, {
       method: "POST",
       headers: {
-        "apikey": SUPABASE_ANON_KEY,
-        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
         "Content-Type": "application/json",
         "Prefer": "return=minimal",
       },
