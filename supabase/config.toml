@@ -1,0 +1,10 @@
+# Supabase project configuration
+project_id = "bbkxyxbbegpcvfiarlmg"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+
+[db]
+port = 54322
